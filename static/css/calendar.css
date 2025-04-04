@@ -1,0 +1,11 @@
+/* calendar.css: カレンダーセクション専用のスタイル */
+
+/* カレンダー用スタイル */
+#calendar {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+}
+
+/* カレンダーの月表示や日付に関するスタイルをここに記述 */

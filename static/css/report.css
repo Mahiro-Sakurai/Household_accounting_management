@@ -1,0 +1,10 @@
+/* report.css: レポートセクション専用のスタイル */
+
+#report {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+}
+
+/* レポート用のテーブルスタイルなどをここに記述 */

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家計簿管理アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budget.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <!-- 他のコンテンツ -->
+
+    <!-- フッター部分 -->
+    <div id="footer">
+        <button id="budgetBtn">家計簿入力</button>
+        <button id="calendarBtn">カレンダー</button>
+        <button id="reportBtn">レポート</button>
+        <button id="menuBtn">メニュー</button>
+    </div>
+
+    <!-- 家計簿入力セクション -->
+    <div id="budget" class="section active">
+        <h2>家計簿入力</h2>
+
+        <!-- 支出・収入切り替えボタン -->
+        <div class="income-expense-toggle">
+            <button class="toggleBtn" data-type="expense">支出</button>
+            <button class="toggleBtn" data-type="income">収入</button>
+        </div>
+
+        <!-- 日付と進む・戻るボタン -->
+        <div class="date-section">
+            <label for="date">日付</label>
+            <input type="date" id="date">
+            <button id="prevDayBtn">前の日</button>
+            <button id="nextDayBtn">次の日</button>
+        </div>
+
+        <!--メモ入力テキストエリア-->
+        <div class="memo-section">
+            <label for="memo">メモ</label>
+            <textarea id="memo" rows="4" placeholder="メモを入力"></textarea>
+        </div>
+
+        <!--金額入力エリア-->
+        <div class="amount-section">
+            <label for="amount">金額</label>
+            <input type="number" id="amount" placeholder="金額">
+        </div>
+        <!-- カテゴリー選択 -->
+        <div class="category-section">
+            <h4>カテゴリーを選択<button id="categoryBtn">編集</button></h4>
+            <div id="categoryGrid" class="category-grid">
+                <!-- JavaScriptで動的に追加 -->
+            </div>
+
+            <!--送信-->
+            <button id="submitBtn">送信</button>
+        </div>
+    </div>
+
+    <!-- カテゴリー編集セクション -->
+    <div id="category" class="section">
+        <h2>カテゴリー編集</h2>
+
+        <!-- 編集モード時の支出・収入切り替えボタン -->
+        <div class="income-expense-toggle">
+            <button class="toggleBtn" data-type="editExpense">支出</button>
+            <button class="toggleBtn" data-type="editIncome">収入</button>
+        </div>
+
+
+        <!-- 追加ボタン -->
+        <div class="add-category-section">
+            <textarea id="addCategoryInput" rows="1" placeholder="新規カテゴリーを入力"></textarea>
+            <button id="addCategoryBtn">追加</button>
+        </div>
+
+        <!-- 編集ボタン -->
+        <div class="edit-category-button">
+            <button id="editCategoryBtn">編集</button>
+        </div>
+
+        <!-- カテゴリー一覧 -->
+        <div class="category-grid" id="editCategoryGrid">
+            <!-- JavaScriptで追加 -->
+        </div>
+    </div>
+
+
+
+    <!-- カレンダーセクション -->
+    <div id="calendar" class="section">
+        <h2>カレンダーaaa</h2>
+        <!-- ここにカレンダー表示 -->
+    </div>
+
+    <!-- レポートセクション -->
+    <div id="report" class="section">
+        <h2>レポート</h2>
+        <!-- ここにレポート表示 -->
+    </div>
+
+    <!-- メニューセクション -->
+    <div id="menu" class="section">
+        <h2>メニュー</h2>
+        <!-- ここにレポート表示 -->
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/category.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/budget.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/report.js') }}"></script>
+</body>
+
+</html>

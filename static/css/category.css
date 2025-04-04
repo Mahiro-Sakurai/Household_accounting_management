@@ -1,0 +1,59 @@
+/* 表示用カテゴリーグリッド（3列×4行） */
+#categoryGrid.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列固定 */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* 表示用カテゴリーのボタン */
+.category-button {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.category-button.active {
+    background-color: #88c0d0;
+    color: #fff;
+}
+
+/* 編集用カテゴリーリスト */
+#editCategoryGrid.category-grid {
+    display: flex;
+    flex-direction: column;
+    /* 縦並び */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* 編集用：1つの項目のスタイル */
+.edit-category-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-category-item input {
+    flex: 1;
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.edit-category-item button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
