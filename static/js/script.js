@@ -10,6 +10,9 @@ function changeSection(sectionId) {
 document.getElementById("budgetBtn").addEventListener("click", function () {
     changeSection("budget");
 });
+document.getElementById("backBudgetBtn").addEventListener("click", function () {
+    changeSection("budget");
+});
 document.getElementById("calendarBtn").addEventListener("click", function () {
     changeSection("calendar");
 });
