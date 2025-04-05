@@ -45,13 +45,14 @@
         <!--メモ入力テキストエリア-->
         <div class="memo-section">
             <label for="memo">メモ</label>
-            <textarea id="memo" rows="4" placeholder="メモを入力"></textarea>
+            <textarea id="memo" rows="1" maxlength="15" placeholder="15文字以内の箇条書き"></textarea>
+            <p id="memoInputError" style="color: red;"></p>
         </div>
 
         <!--金額入力エリア-->
         <div class="amount-section">
             <label for="amount">金額</label>
-            <input type="number" id="amount" placeholder="金額">
+            <input type="number" min="1" id="amount" placeholder="金額">
         </div>
         <!-- カテゴリー選択 -->
         <div class="category-section">
@@ -115,11 +116,14 @@
         <!-- ここにレポート表示 -->
     </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/category.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/budget.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/report.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/CategoryManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/FormInput.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/modules/FormSubmit.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/budget.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/report.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
 
 </html>
