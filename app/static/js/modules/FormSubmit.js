@@ -6,6 +6,7 @@ export default class FormSubmit {
     }
 
     init() {
+
         this.submitBtn.addEventListener("click", () => {
             const { date, memo, amount } = this.formInput.getInputData();
             const category = this.categoryManager.getSelectedCategory();
@@ -17,6 +18,9 @@ export default class FormSubmit {
             }
 
             const data = { date, amount, memo, category, expenseType };
+
+            console.log(JSON.stringify(data));
+
 
             fetch("/submit", {
                 method: "POST",

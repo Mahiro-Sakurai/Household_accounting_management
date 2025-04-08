@@ -23,6 +23,7 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
+    expence_type = db.Column(db.String(10), nullable=False)
 
     def __repr__(self):
         return f"<Category {self.name}>"

@@ -12,26 +12,9 @@ export default class CategoryManager {
         this.selectedCategory = null;
         this.editMode = false;
 
-        this.categories = {
-            expense: [
-                '食費', '交通費', '娯楽', '日用品', '医療', '通信費',
-                '交際費', '教育', '光熱費', '家賃', '貯金', 'その他'
-            ],
-            income: [
-                '給料', 'ボーナス', '副業', '投資収入', 'その他収入'
-            ]
-        };
+        this.categories = { expense: [], income: [] };
 
-        this.addBtn.addEventListener("click", this.handleAddCategory.bind(this));
-        this.editToggleBtn.addEventListener("click", this.toggleEditMode.bind(this));
-        this.toggleBtns.forEach(btn => {
-            btn.addEventListener("click", (event) => {
-                const type = event.target.getAttribute("data-type");
-                this.handleCategoryToggle(type, event.target);
-            });
-        });
-
-        this.render();
+        this.fetchCategories();
     }
 
     render() {
@@ -127,4 +110,39 @@ export default class CategoryManager {
     getSelectedCategory() {
         return this.selectedCategory;
     }
+
+    async fetchCategories() {
+        try {
+            const res = await fetch("http://localhost:5000/api/categories");
+            const data = await res.json();
+
+            // 整形処理を追加！
+            const categories = { expense: [], income: [] };
+            data.forEach(item => {
+                const type = item.expence_type; // ← スペル注意！（"expence"）
+                if (type === "expense" || type === "income") {
+                    categories[type].push(item.name);
+                }
+            });
+
+            this.categories = categories;
+            console.log("整形済みカテゴリ:", this.categories);
+
+            // イベントリスナーの設定
+            this.addBtn.addEventListener("click", this.handleAddCategory.bind(this));
+            this.editToggleBtn.addEventListener("click", this.toggleEditMode.bind(this));
+            this.toggleBtns.forEach(btn => {
+                btn.addEventListener("click", (event) => {
+                    const type = event.target.getAttribute("data-type");
+                    this.handleCategoryToggle(type, event.target);
+                });
+            });
+
+            this.render();
+        } catch (err) {
+            console.error("カテゴリ取得エラー:", err);
+            alert("カテゴリーの取得に失敗しました");
+        }
+    }
+
 }

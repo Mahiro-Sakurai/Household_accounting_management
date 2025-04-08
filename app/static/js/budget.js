@@ -29,3 +29,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const formSubmit = new FormSubmit("submitBtn", formInput, categoryManager);
     formSubmit.init();
 });
+
