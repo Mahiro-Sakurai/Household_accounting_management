@@ -12,13 +12,13 @@ export default class FormSubmit {
             const expenseType = document.querySelector(".income-expense-toggle .active")?.dataset.type || "expense"
 
             if (!category || !amount || !expenseType) {
-                alert("必必な情報が入力されていません");
+                alert("必要な情報が入力されていません");
                 return;
             }
 
             const data = { date, amount, memo, category, expenseType };
 
-            fetch("/save-budget", {
+            fetch("/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -35,3 +35,4 @@ export default class FormSubmit {
         });
     }
 }
+

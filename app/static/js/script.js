@@ -1,4 +1,3 @@
-
 function changeSection(sectionId) {
     let sections = document.querySelectorAll(".section");
     sections.forEach(function (section) {

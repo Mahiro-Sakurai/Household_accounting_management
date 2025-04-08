@@ -1,0 +1,54 @@
+/* カレンダー全体のスタイル */
+#calendarContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+}
+
+/* カレンダーのヘッダー部分 */
+#calendarContainer thead {
+    background-color: #f2f2f2;
+}
+
+#calendarContainer th {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* カレンダーの日付セル */
+#calendarContainer td {
+    width: 14.28%;
+    height: 80px;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+/* 今日の日付のハイライト */
+#calendarContainer td.today {
+    background-color: #ffeb3b;
+}
+
+/* 日付番号のスタイル */
+#calendarContainer td span.date {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 支出・収入の表示スタイル */
+#calendarContainer td .income {
+    color: blue;
+    font-size: 12px;
+}
+
+#calendarContainer td .expense {
+    color: red;
+    font-size: 12px;
+}
