@@ -12,7 +12,7 @@ def save_budget():
     data = request.get_json()
 
     # Category をデータベースから取得
-    category = Category.query.filter_by(name=data["category"]).first()
+    category = Category.query.filter_by(id=data["category_id"]).first()
 
     # Category が見つからなければエラーを返す
     if not category:

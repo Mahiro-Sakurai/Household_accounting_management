@@ -31,9 +31,9 @@ export default class CategoryManager {
         this.displayGrid.innerHTML = '';
         this.categories[this.currentType].forEach(category => {
             const btn = document.createElement("button");
-            btn.textContent = category;
+            btn.textContent = category.name;
             btn.classList.add("category-button");
-            if (category === this.selectedCategory) btn.classList.add("active");
+            if (category.name === this.selectedCategory?.name) btn.classList.add("active");
 
             btn.addEventListener("click", () => {
                 this.selectedCategory = category;
@@ -53,40 +53,55 @@ export default class CategoryManager {
             item.classList.add("edit-category-item");
 
             if (this.editMode) {
-                const delBtn = document.createElement("button");
-                delBtn.textContent = "削除";
-                delBtn.addEventListener("click", () => {
-                    this.categories[this.currentType].splice(index, 1);
-                    this.render();
-                });
-
                 const input = document.createElement("input");
                 input.type = "text";
-                input.value = category;
-                input.addEventListener("input", () => {
-                    this.categories[this.currentType][index] = input.value;
-                    this.renderCategoryButtons();
+                input.value = category.name;
+                input.addEventListener("blur", async () => {
+                    const newName = input.value.trim();
+                    if (!newName || newName === category.name) return;
+
+                    try {
+                        const res = await fetch(`/api/categories/${category.id}`, {
+                            method: "PUT",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ name: newName })
+                        });
+
+                        const result = await res.json();
+                        this.categories[this.currentType][index].name = newName;
+                        this.renderCategoryButtons();
+                    } catch (err) {
+                        console.error("編集失敗:", err);
+                        alert("カテゴリ編集に失敗しました");
+                    }
                 });
 
-                item.appendChild(delBtn);
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "削除";
+                delBtn.addEventListener("click", async () => {
+                    try {
+                        await fetch(`/api/categories/${category.id}`, {
+                            method: "DELETE"
+                        });
+
+                        this.categories[this.currentType].splice(index, 1);
+                        this.render();
+                    } catch (err) {
+                        console.error("削除エラー:", err);
+                        alert("カテゴリ削除に失敗しました");
+                    }
+                });
+
                 item.appendChild(input);
+                item.appendChild(delBtn);
             } else {
                 const label = document.createElement("span");
-                label.textContent = category;
+                label.textContent = category.name;
                 item.appendChild(label);
             }
 
             this.editGrid.appendChild(item);
         });
-    }
-
-    handleAddCategory() {
-        const newCategory = this.addInput.value.trim();
-        if (newCategory) {
-            this.categories[this.currentType].push(newCategory);
-            this.addInput.value = '';
-            this.render();
-        }
     }
 
     toggleEditMode() {
@@ -113,22 +128,19 @@ export default class CategoryManager {
 
     async fetchCategories() {
         try {
-            const res = await fetch("http://localhost:5000/api/categories");
+            const res = await fetch("/api/categories");
             const data = await res.json();
 
-            // 整形処理を追加！
             const categories = { expense: [], income: [] };
             data.forEach(item => {
-                const type = item.expence_type; // ← スペル注意！（"expence"）
+                const type = item.expence_type;
                 if (type === "expense" || type === "income") {
-                    categories[type].push(item.name);
+                    categories[type].push({ id: item.id, name: item.name });
                 }
             });
 
             this.categories = categories;
-            console.log("整形済みカテゴリ:", this.categories);
 
-            // イベントリスナーの設定
             this.addBtn.addEventListener("click", this.handleAddCategory.bind(this));
             this.editToggleBtn.addEventListener("click", this.toggleEditMode.bind(this));
             this.toggleBtns.forEach(btn => {
@@ -145,4 +157,32 @@ export default class CategoryManager {
         }
     }
 
+    async handleAddCategory() {
+        const newCategory = this.addInput.value.trim();
+        if (!newCategory) {
+            alert("値を入力してください")
+            return;
+        }
+
+        const payload = {
+            name: newCategory,
+            expence_type: this.currentType
+        };
+
+        try {
+            const res = await fetch("/api/categories", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            this.categories[this.currentType].push({ id: result.id, name: newCategory });
+            this.addInput.value = '';
+            this.render();
+        } catch (err) {
+            console.error("追加エラー:", err);
+            alert("カテゴリ追加に失敗しました");
+        }
+    }
 }

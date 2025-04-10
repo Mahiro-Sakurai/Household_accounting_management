@@ -10,17 +10,23 @@ export default class FormSubmit {
         this.submitBtn.addEventListener("click", () => {
             const { date, memo, amount } = this.formInput.getInputData();
             const category = this.categoryManager.getSelectedCategory();
-            const expenseType = document.querySelector(".income-expense-toggle .active")?.dataset.type || "expense"
+            const category_id = category.id
+            const expenseType = document.querySelector(".income-expense-toggle .active")?.dataset.type || "expense";
 
             if (!category || !amount || !expenseType) {
                 alert("必要な情報が入力されていません");
                 return;
             }
 
-            const data = { date, amount, memo, category, expenseType };
+            const data = {
+                date,
+                amount,
+                memo,
+                category_id,
+                expenseType
+            };
 
             console.log(JSON.stringify(data));
-
 
             fetch("/submit", {
                 method: "POST",

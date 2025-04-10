@@ -9,6 +9,9 @@ def initialize_categories():
     app = create_app()
 
     with app.app_context():
+
+        db.session.query(Category).delete()
+
         categories = {
             "expense": [
                 "食費",
