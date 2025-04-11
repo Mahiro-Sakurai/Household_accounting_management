@@ -126,11 +126,13 @@
         <!-- ここにレポート表示 -->
     </div>
 
-    <script type="module" src="{{ url_for('static', filename='js/modules/CategoryManager.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/modules/FormInput.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/modules/FormSubmit.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/modules/CalendarManager.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/budget.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/api/categoryApi.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/api/budgetApi.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/manager/categoryManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/manager/budgetManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/views/categoryView.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/views/budgetView.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/calendar.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/report.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/script.js') }}"></script>

@@ -50,11 +50,11 @@ def update_category(category_id):
 
 @category_bp.route("/api/categories/<int:category_id>", methods=["DELETE"])
 def delete_category(category_id):
-    category = Category.query.get(category_id)
+    category = Category.query.get_or_404(category_id)
     if not category:
         return jsonify({"error": "Category not found"}), 404
-
+    if category.budgets:  # 紐づく予算があるなら削除禁止
+        return jsonify({"error": "このカテゴリは使用中のため削除できません"}), 400
     db.session.delete(category)
     db.session.commit()
-
-    return jsonify({"message": "Category deleted"})
+    return jsonify({"message": "カテゴリ削除完了"}), 200
