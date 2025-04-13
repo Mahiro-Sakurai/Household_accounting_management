@@ -7,7 +7,7 @@ from app.models.budget import Category  # Category インポート
 budget_bp = Blueprint("budget", __name__)
 
 
-@budget_bp.route("/submit", methods=["POST"])
+@budget_bp.route("/budget", methods=["POST"])
 def save_budget():
     data = request.get_json()
 
@@ -20,7 +20,7 @@ def save_budget():
 
     # Budget インスタンスを作成
     budget = Budget(
-        expence_type=data["expenseType"],
+        expense_type=data["expense_type"],
         category=category,  # Category インスタンスを関連付け
         amount=data["amount"],
         date=data["date"],
@@ -44,7 +44,7 @@ def get_budgets():
         [
             {
                 "id": b.id,
-                "expenseType": b.expence_type,
+                "expenseType": b.expense_type,
                 "category": b.category,
                 "amount": b.amount,
                 "date": b.date,

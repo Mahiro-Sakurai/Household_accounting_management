@@ -1,5 +1,3 @@
-# app/init_db.py に書く
-
 from app import create_app
 from app.db import db
 from app.models.budget import Category
@@ -9,7 +7,10 @@ def initialize_categories():
     app = create_app()
 
     with app.app_context():
+        # 🔽 ここを追加！テーブル作成（存在しない場合のみ）
+        db.create_all()
 
+        # カテゴリ初期化
         db.session.query(Category).delete()
 
         categories = {
@@ -33,9 +34,12 @@ def initialize_categories():
         for expense_type, names in categories.items():
             for name in names:
                 exists = Category.query.filter_by(
-                    name=name, expence_type=expense_type
+                    name=name, expense_type=expense_type
                 ).first()
                 if not exists:
-                    db.session.add(Category(name=name, expence_type=expense_type))
+                    db.session.add(Category(name=name, expense_type=expense_type))
         db.session.commit()
         print("カテゴリ初期化完了！")
+
+
+initialize_categories()

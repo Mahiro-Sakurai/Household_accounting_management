@@ -1,21 +1,21 @@
-console.log("budgetApi読み込み")
-/*
+const BASE_URL = "/budget";
 
-
-export async function submitBudget(data) {
+// データ送信（POST）
+export async function createBudget(data) {
     try {
-        const response = await fetch("/submit", {
+        const res = await fetch(BASE_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
-        if (!response.ok) throw new Error("サーバーエラー");
-        return await response.json();
+        if (!res.ok) throw new Error("データ送信に失敗しました");
 
-    } catch (error) {
-        console.error("API Error:", error);
-        throw error;
+        return await res.json(); // { message }
+    } catch (err) {
+        console.error("送信エラー:", err);
+        alert("データ送信に失敗しました");
+        throw err;
     }
 }
-*/
+

@@ -13,7 +13,7 @@ export async function readCategory() {
         const categories = { expense: [], income: [] };
 
         data.forEach(item => {
-            const type = item.expence_type; // ← Flaskのキーに合わせてる！
+            const type = item.expense_type; // ← Flaskのキーに合わせてる！
             if (type === "expense" || type === "income") {
                 categories[type].push({ id: item.id, name: item.name });
             }

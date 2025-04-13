@@ -1,5 +1,7 @@
 import CategoryManager from "./manager/categoryManager.js";
 import CategoryView from "./views/categoryView.js";
+import BudgetManager from "./manager/budgetManager.js";
+import BudgetView from "./views/budgetView.js";
 
 // 画面切り替えユーティリティ関数
 function switchSection(targetId) {
@@ -21,8 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleBtns: document.querySelectorAll(".toggleBtn"),
         amountInput: document.getElementById("amount")
     });
-
     categoryView.init();
+
+    // budget管理初期化
+    const budgetManager = new BudgetManager(categoryManager, {
+        dateInput: document.getElementById("date"),
+        memoInput: document.getElementById("memo"),
+        amountInput: document.getElementById("amount"),
+
+    });
+    const budgetView = new BudgetView(budgetManager,
+        {
+            prevDayBtn: document.getElementById("prevDayBtn"),
+            nextDayBtn: document.getElementById("nextDayBtn"),
+            submitBtn: document.getElementById("submitBtn"),
+            overlay: document.getElementById("overlay")
+        }
+    );
+    budgetView.init();
 
     // 画面切り替えイベント
     document.getElementById("budgetBtn").addEventListener("click", () => {

@@ -45,8 +45,7 @@
         <!--メモ入力テキストエリア-->
         <div class="memo-section">
             <label for="memo">メモ</label>
-            <textarea id="memo" rows="1" maxlength="15" placeholder="15文字以内の箇条書き"></textarea>
-            <p id="memoInputError" style="color: red;"></p>
+            <textarea id="memo" rows="1" maxlength="15" placeholder="20文字以内"></textarea>
         </div>
 
         <!--金額入力エリア-->
@@ -63,6 +62,9 @@
 
             <!--送信-->
             <button id="submitBtn">送信</button>
+        </div>
+        <div id="overlay" class="hidden">
+            <div class="modal">データを入力しました</div>
         </div>
     </div>
 

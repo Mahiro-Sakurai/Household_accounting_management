@@ -9,7 +9,7 @@ category_bp = Blueprint("category", __name__)
 def get_categories():
     categories = Category.query.all()
     result = [
-        {"id": c.id, "name": c.name, "expence_type": c.expence_type} for c in categories
+        {"id": c.id, "name": c.name, "expense_type": c.expense_type} for c in categories
     ]
     return jsonify(result)
 
@@ -18,12 +18,12 @@ def get_categories():
 def add_category():
     data = request.get_json()
     name = data.get("name")
-    expence_type = data.get("expence_type")
+    expense_type = data.get("expense_type")
 
-    if not name or expence_type not in ["expense", "income"]:
+    if not name or expense_type not in ["expense", "income"]:
         return jsonify({"error": "Invalid data"}), 400
 
-    new_category = Category(name=name, expence_type=expence_type)
+    new_category = Category(name=name, expense_type=expense_type)
     db.session.add(new_category)
     db.session.commit()
 

@@ -1,3 +1,5 @@
+/*
+
 import FormInput from "./modules/FormInput.js";
 import CategoryManager from './modules/CategoryManager.js';
 import FormSubmit from "./modules/FormSubmit.js";
@@ -30,3 +32,4 @@ document.addEventListener("DOMContentLoaded", () => {
     formSubmit.init();
 });
 
+*/

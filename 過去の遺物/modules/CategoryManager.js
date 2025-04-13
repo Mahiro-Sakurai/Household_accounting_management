@@ -1,3 +1,4 @@
+/*
 export default class CategoryManager {
     constructor(options) {
         this.displayGrid = options.displayGrid;
@@ -186,3 +187,5 @@ export default class CategoryManager {
         }
     }
 }
+
+*/
