@@ -16,13 +16,17 @@ export default class BudgetManager {
     }
 
     updateDateInput() {
-        this.dateInput.value = this._date.toISOString().split("T")[0];
+        const yyyy = this._date.getFullYear();
+        const mm = String(this._date.getMonth() + 1).padStart(2, '0');
+        const dd = String(this._date.getDate()).padStart(2, '0');
+        this.dateInput.value = `${yyyy}-${mm}-${dd}`;
     }
 
     prevDate() {
         this._date.setDate(this._date.getDate() - 1);
         this.updateDateInput();
     }
+
     nextDate() {
         this._date.setDate(this._date.getDate() + 1);
         this.updateDateInput();

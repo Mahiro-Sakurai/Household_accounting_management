@@ -18,11 +18,14 @@ export default class BudgetView {
     init() {
         this.budgetManager.init();
         this.renderMemoValidate();
+
     }
 
     renderMemoValidate() {
         this.budgetManager.memoValidate()
     }
+
+
 
     showModal() {
         this.overlay.classList.remove("hidden");

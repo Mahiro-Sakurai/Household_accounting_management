@@ -1,9 +1,11 @@
 /* main.css: 全体に適用される共通のスタイル */
 
 /* 基本的なスタイル */
+html,
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f7fc;
+    overflow: hidden;
     margin: 0;
     padding: 0;
     display: flex;

@@ -8,7 +8,7 @@ class Budget(db.Model):
     expense_type = db.Column(db.String(10))  # expense_type を追加
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"), nullable=False)
     amount = db.Column(db.Integer)
-    date = db.Column(db.String(20))
+    date = db.Column(db.Date)
     memo = db.Column(db.String(200))
 
     # Categoryとのリレーション（関連付け）

@@ -2,6 +2,9 @@ import CategoryManager from "./manager/categoryManager.js";
 import CategoryView from "./views/categoryView.js";
 import BudgetManager from "./manager/budgetManager.js";
 import BudgetView from "./views/budgetView.js";
+import CalendarManager from "./manager/calendarManager.js";
+import CalendarView from "./views/calendarView.js";
+
 
 // 画面切り替えユーティリティ関数
 function switchSection(targetId) {
@@ -11,7 +14,7 @@ function switchSection(targetId) {
     document.getElementById(targetId).classList.add("active");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // カテゴリ管理初期化
     const categoryManager = new CategoryManager();
     const categoryView = new CategoryView(categoryManager, {
@@ -29,18 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const budgetManager = new BudgetManager(categoryManager, {
         dateInput: document.getElementById("date"),
         memoInput: document.getElementById("memo"),
-        amountInput: document.getElementById("amount"),
-
+        amountInput: document.getElementById("amount")
     });
-    const budgetView = new BudgetView(budgetManager,
-        {
-            prevDayBtn: document.getElementById("prevDayBtn"),
-            nextDayBtn: document.getElementById("nextDayBtn"),
-            submitBtn: document.getElementById("submitBtn"),
-            overlay: document.getElementById("overlay")
-        }
-    );
+    const budgetView = new BudgetView(budgetManager, {
+        prevDayBtn: document.getElementById("prevDayBtn"),
+        nextDayBtn: document.getElementById("nextDayBtn"),
+        submitBtn: document.getElementById("submitBtn"),
+        overlay: document.getElementById("overlay")
+    });
     budgetView.init();
+
+    const calendarManager = new CalendarManager({
+        monthLabel: document.getElementById("monthLabel")
+    })
+    const calendarView = new CalendarView(calendarManager, {
+        prevMonthBtn: document.getElementById("prevMonthBtn"),
+        nextMonthBtn: document.getElementById("nextMonthBtn"),
+        calendarGrid: document.getElementById("calendarGrid"),
+        monthlySummary: document.getElementById("monthlySummary"),
+        detailContainer: document.getElementById("detailContainer")
+    });
+    calendarView.init();
 
     // 画面切り替えイベント
     document.getElementById("budgetBtn").addEventListener("click", () => {
@@ -69,4 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
         switchSection("budget");
     });
 });
-

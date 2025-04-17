@@ -100,21 +100,29 @@
 
 
 
+
     <!-- カレンダーセクション -->
     <div id="calendar" class="section">
-        <h2>カレンダー</h2>
-        <div id="calendarHeader">
-            <button id="prevMonth">＜</button>
-            <span id="currentMonth"></span>
-            <button id="nextMonth">＞</button>
+        <div class="calendar-container">
+            <div class="calendar-left">
+                <div class="calendar-header">
+                    <button id="prevMonthBtn">◀︎</button>
+                    <span id="monthLabel"></span>
+                    <button id="nextMonthBtn">▶︎</button>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+            <div class="calendar-right">
+                <div id="monthlySummary" class="monthly-summary"></div>
+                <div id="detailContainer" class="detail-container"></div>
+            </div>
         </div>
-        <div id="calendarContainer"></div>
-        <div id="detailContainer">
-            <h3 id="detailDate"></h3>
-            <ul id="detailList"></ul>
-        </div>
-
     </div>
+
+
+
+
+
 
     <!-- レポートセクション -->
     <div id="report" class="section">
@@ -132,11 +140,11 @@
     <script type="module" src="{{ url_for('static', filename='js/api/budgetApi.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/manager/categoryManager.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/manager/budgetManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/manager/calendarManager.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/views/categoryView.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/views/budgetView.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/views/calendarView.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/calendar.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/report.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>

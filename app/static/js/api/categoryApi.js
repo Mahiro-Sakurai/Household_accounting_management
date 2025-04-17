@@ -13,7 +13,7 @@ export async function readCategory() {
         const categories = { expense: [], income: [] };
 
         data.forEach(item => {
-            const type = item.expense_type; // ← Flaskのキーに合わせてる！
+            const type = item.expense_type;
             if (type === "expense" || type === "income") {
                 categories[type].push({ id: item.id, name: item.name });
             }
@@ -22,7 +22,6 @@ export async function readCategory() {
         return categories;
     } catch (err) {
         console.error("カテゴリ取得エラー:", err);
-        alert("カテゴリーの取得に失敗しました");
         return { expense: [], income: [] }; // fallback
     }
 }

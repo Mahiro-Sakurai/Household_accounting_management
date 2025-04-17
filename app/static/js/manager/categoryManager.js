@@ -1,5 +1,3 @@
-console.log("categoryManager読み込み")
-// categoryManager.js
 import { readCategory, createCategory, updateCategory, deleteCategory } from "../api/categoryApi.js";
 
 export default class CategoryManager {

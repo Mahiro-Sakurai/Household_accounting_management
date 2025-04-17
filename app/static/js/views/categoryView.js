@@ -1,5 +1,3 @@
-console.log("categoryView読み込み")
-
 // categoryView.js
 export default class CategoryView {
     constructor(manager, elements) {
@@ -117,4 +115,5 @@ export default class CategoryView {
         this.addInput.value = '';
         this.render();
     }
+
 }

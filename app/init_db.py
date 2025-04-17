@@ -1,45 +1,54 @@
 from app import create_app
 from app.db import db
-from app.models.budget import Category
+from app.models.budget import Category, Budget
+from app.sample_data.category_samples import categories
+from app.sample_data.budget_samples import sample_budgets
+
+from datetime import date
 
 
 def initialize_categories():
     app = create_app()
 
     with app.app_context():
-        # 🔽 ここを追加！テーブル作成（存在しない場合のみ）
         db.create_all()
 
-        # カテゴリ初期化
+        # 既存データ削除
+        db.session.query(Budget).delete()
         db.session.query(Category).delete()
-
-        categories = {
-            "expense": [
-                "食費",
-                "交通費",
-                "娯楽",
-                "日用品",
-                "医療",
-                "通信費",
-                "交際費",
-                "教育",
-                "光熱費",
-                "家賃",
-                "貯金",
-                "その他",
-            ],
-            "income": ["給料", "ボーナス", "副業", "投資収入", "その他収入"],
-        }
 
         for expense_type, names in categories.items():
             for name in names:
-                exists = Category.query.filter_by(
-                    name=name, expense_type=expense_type
-                ).first()
-                if not exists:
-                    db.session.add(Category(name=name, expense_type=expense_type))
+                db.session.add(Category(name=name, expense_type=expense_type))
+
+        db.session.commit()  # ここで ID が確定する！
+
+        # カテゴリの name → id をマッピング
+        category_map = {
+            (category.name, category.expense_type): category.id
+            for category in Category.query.all()
+        }
+
+        for entry in sample_budgets:
+            key = (entry["category_name"], entry["expense_type"])
+            category_id = category_map.get(key)
+
+            if category_id:
+                budget = Budget(
+                    expense_type=entry["expense_type"],
+                    category_id=category_id,
+                    amount=entry["amount"],
+                    date=entry["date"],
+                    memo=entry["memo"],
+                )
+                db.session.add(budget)
+            else:
+                print(f"⚠️ カテゴリが見つかりません: {key}")
+
         db.session.commit()
-        print("カテゴリ初期化完了！")
+        print("✅ カテゴリ初期化完了！")
+        print("✅ サンプル家計簿データ挿入完了！")
 
 
+# 実行
 initialize_categories()
