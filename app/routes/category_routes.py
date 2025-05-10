@@ -6,7 +6,7 @@ category_bp = Blueprint("category", __name__)
 
 
 @category_bp.route("/api/categories", methods=["GET"])
-def get_categories():
+def read_categories():
     categories = Category.query.all()
     result = [
         {"id": c.id, "name": c.name, "expense_type": c.expense_type} for c in categories
@@ -15,7 +15,7 @@ def get_categories():
 
 
 @category_bp.route("/api/categories", methods=["POST"])
-def add_category():
+def create_category():
     data = request.get_json()
     name = data.get("name")
     expense_type = data.get("expense_type")
@@ -27,7 +27,15 @@ def add_category():
     db.session.add(new_category)
     db.session.commit()
 
-    return jsonify({"message": "Category added", "id": new_category.id}), 201
+    return (
+        jsonify(
+            {
+                "message": "Category added",
+                "id": new_category.id,
+            }
+        ),
+        201,
+    )
 
 
 @category_bp.route("/api/categories/<int:category_id>", methods=["PUT"])

@@ -24,82 +24,10 @@
         <button id="menuBtn">メニュー</button>
     </div>
 
-    <!-- 家計簿入力セクション -->
-    <div id="budget" class="section active">
-        <h2>家計簿入力</h2>
-
-        <!-- 支出・収入切り替えボタン -->
-        <div class="income-expense-toggle">
-            <button class="toggleBtn" data-type="expense">支出</button>
-            <button class="toggleBtn" data-type="income">収入</button>
-        </div>
-
-        <!-- 日付と進む・戻るボタン -->
-        <div class="date-section">
-            <label for="date">日付</label>
-            <input type="date" id="date">
-            <button id="prevDayBtn">前の日</button>
-            <button id="nextDayBtn">次の日</button>
-        </div>
-
-        <!--メモ入力テキストエリア-->
-        <div class="memo-section">
-            <label for="memo">メモ</label>
-            <textarea id="memo" rows="1" maxlength="15" placeholder="20文字以内"></textarea>
-        </div>
-
-        <!--金額入力エリア-->
-        <div class="amount-section">
-            <label for="amount">金額</label>
-            <input type="number" min="1" id="amount" placeholder="金額">
-        </div>
-        <!-- カテゴリー選択 -->
-        <div class="category-section">
-            <h4>カテゴリーを選択<button id="categoryBtn">編集</button></h4>
-            <div id="categoryGrid" class="category-grid">
-                <!-- JavaScriptで動的に追加 -->
-            </div>
-
-            <!--送信-->
-            <button id="submitBtn">送信</button>
-        </div>
-        <div id="overlay" class="hidden">
-            <div class="modal">データを入力しました</div>
-        </div>
+    <!-- 家計簿入力 -->
+    <div id="budget" class="section">
+        <div id="budgetFormCreateToday"></div>
     </div>
-
-    <!-- カテゴリー編集セクション -->
-    <div id="category" class="section">
-        <h2>カテゴリー編集</h2>
-        <!--家計簿入力セクションに戻るボタン-->
-        <button class="back-budget-Btn" id="backBudgetBtn">戻る</button>
-
-        <!-- 編集モード時の支出・収入切り替えボタン -->
-        <div class="income-expense-toggle">
-            <button class="toggleBtn" data-type="editExpense">支出</button>
-            <button class="toggleBtn" data-type="editIncome">収入</button>
-        </div>
-
-
-        <!-- 追加ボタン -->
-        <div class="add-category-section">
-            <textarea id="addCategoryInput" rows="1" placeholder="新規カテゴリーを入力"></textarea>
-            <button id="addCategoryBtn">追加</button>
-        </div>
-
-        <!-- 編集ボタン -->
-        <div class="edit-category-button">
-            <button id="editCategoryBtn">編集</button>
-        </div>
-
-        <!-- カテゴリー一覧 -->
-        <div class="category-grid" id="editCategoryGrid">
-            <!-- JavaScriptで追加 -->
-        </div>
-    </div>
-
-
-
 
     <!-- カレンダーセクション -->
     <div id="calendar" class="section">
@@ -117,7 +45,19 @@
                 <div id="detailContainer" class="detail-container"></div>
             </div>
         </div>
+        <div id="modal-container">
+            <div id="modal">
+                <div id="content"></div>
+            </div>
+        </div>
     </div>
+    </div>
+
+
+
+
+
+
 
 
 
@@ -138,12 +78,15 @@
 
     <script type="module" src="{{ url_for('static', filename='js/api/categoryApi.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/api/budgetApi.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/manager/categoryManager.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/manager/budgetManager.js') }}"></script>
+
     <script type="module" src="{{ url_for('static', filename='js/manager/calendarManager.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/views/categoryView.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/views/budgetView.js') }}"></script>
+
+    <script type="module" src="{{ url_for('static', filename='js/manager/createFormManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/manager/updateFormManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/views/formView.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/views/calendarView.js') }}"></script>
+
+    <script type="module" src="{{ url_for('static', filename='js/openForm.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/script.js') }}"></script>
 

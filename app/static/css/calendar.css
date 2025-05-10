@@ -171,6 +171,14 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* セルクリックによるハイライト */
+.daily-detail-table.highlight {
+    background-color: rgba(135, 206, 250, 0.3);
+    /* 薄い水色 */
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+}
+
 /* ヘッダーの日付＋収支 */
 .daily-detail-table thead th {
     background-color: #f0f0f0;
@@ -204,4 +212,34 @@
     width: 40%;
     color: #666;
     font-style: italic;
+}
+
+
+#modal-container {
+    display: none;
+    /* ← 最初は非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    /* ← 背景を半透明に */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#modal {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 70vw;
+    /* 幅：画面の70% */
+    height: 85vh;
+    /* 高さ：画面の70% */
+    overflow-y: auto;
+    /* 中身が多くてもスクロール可能に */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
 }

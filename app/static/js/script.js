@@ -1,4 +1,6 @@
-function changeSection(sectionId) {
+import openForm from "./openForm.js";
+
+export default function changeSection(sectionId) {
     let sections = document.querySelectorAll(".section");
     sections.forEach(function (section) {
         section.classList.remove("active");
@@ -6,11 +8,18 @@ function changeSection(sectionId) {
     document.getElementById(sectionId).classList.add("active");
 }
 
-document.getElementById("budgetBtn").addEventListener("click", function () {
+document.getElementById("budgetBtn").addEventListener("click", async () => {
     changeSection("budget");
-});
-document.getElementById("backBudgetBtn").addEventListener("click", function () {
-    changeSection("budget");
+
+    const initialData = {
+        type: "expense",
+        date: new Date(),
+        memo: null,
+        amount: null,
+        selectedCategory: null
+    }
+    await openForm("budgetFormCreateToday", "create", initialData);
+
 });
 document.getElementById("calendarBtn").addEventListener("click", function () {
     changeSection("calendar");
@@ -21,6 +30,4 @@ document.getElementById("reportBtn").addEventListener("click", function () {
 document.getElementById("menuBtn").addEventListener("click", function () {
     changeSection("menu");
 });
-document.getElementById("categoryBtn").addEventListener("click", function () {
-    changeSection("category");
-});
+

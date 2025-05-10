@@ -18,6 +18,12 @@
     background-color: #ddd;
 }
 
+.toggleBtn.active {
+    background-color: #007bff;
+    /* 青にハイライト */
+    color: white;
+}
+
 .date-section,
 .memo-section,
 .amount-section,
@@ -87,6 +93,7 @@
     align-items: center;
     z-index: 1000;
 }
+
 
 .modal {
     background: white;

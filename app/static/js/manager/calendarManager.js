@@ -7,7 +7,6 @@ export default class CalendarManager {
 
         this._date = new Date();
         this.monthlyBudgets = null;
-        this._date.ge
     }
 
     async init() {
@@ -37,8 +36,7 @@ export default class CalendarManager {
         const month = this._date.getMonth() + 1;
         const monthlyBudgets = await readMonthlyBudgets(year, month);
         this.monthlyBudgets = monthlyBudgets;
-        console.log(monthlyBudgets)
-        console.log(monthlyBudgets.monthly_totals["income"]) // income, expense, net
+        console.log(this.monthlyBudgets)
     }
 
 
