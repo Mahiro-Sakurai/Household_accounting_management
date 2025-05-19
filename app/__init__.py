@@ -15,8 +15,13 @@ def create_app():
     # Flaskアプリケーションのインスタンスappを作成
     app = Flask(__name__)
 
-    # DBの設定を環境変数から取得
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+    database_url = os.environ.get("DATABASE_URL")
+
+    # PostgreSQL on Render 対応：`postgres://` → `postgresql://` に修正（SQLAlchemy要件）
+    if database_url and database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url or "sqlite:///local.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
