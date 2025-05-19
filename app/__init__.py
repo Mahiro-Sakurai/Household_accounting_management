@@ -8,17 +8,17 @@ from app.models.budget import Budget, Category
 from app.routes.budget_routes import budget_bp
 from app.routes.main_routes import main_bp
 from app.routes.category_routes import category_bp
+import os
 
 
 def create_app():
     # Flaskアプリケーションのインスタンスappを作成
     app = Flask(__name__)
 
-    app.secret_key = "flask_secret_key"
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "sqlite:///Household_accounting_management.db"
-    )
+    # DBの設定を環境変数から取得
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
     CORS(app)
 
