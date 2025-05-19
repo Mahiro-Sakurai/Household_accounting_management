@@ -1,5 +1,5 @@
 from app import create_app
-from app.init_db import initialize_categories
+from app.sample_data.initialize_categories import initialize_categories
 
 app = create_app()
 print(app.url_map)

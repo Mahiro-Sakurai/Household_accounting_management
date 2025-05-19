@@ -1,10 +1,7 @@
-from app import create_app
-from app.db import db
+from app import create_app, db
 from app.models.budget import Category, Budget
 from app.sample_data.category_samples import categories
 from app.sample_data.budget_samples import sample_budgets
-
-from datetime import date
 
 
 def initialize_categories():
@@ -23,7 +20,7 @@ def initialize_categories():
 
         db.session.commit()  # ここで ID が確定する！
 
-        # カテゴリの name → id をマッピング
+        # カテゴリ
         category_map = {
             (category.name, category.expense_type): category.id
             for category in Category.query.all()

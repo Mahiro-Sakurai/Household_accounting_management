@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.models.budget import Category
-from app.db import db
+from app.extensions import db
 
 category_bp = Blueprint("category", __name__)
 

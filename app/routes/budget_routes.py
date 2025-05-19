@@ -2,8 +2,8 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy import extract, func, case
 from collections import OrderedDict
 
+from app.extensions import db
 from app.models.budget import Budget
-from app.db import db
 from app.models.budget import Category  # Category インポート
 
 from datetime import datetime
